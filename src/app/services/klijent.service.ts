@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Klijent} from '../models/klijent';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Racun} from '../models/racun';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,12 @@ import {Racun} from '../models/racun';
 export class KlijentService {
   klijent: BehaviorSubject<Klijent> = new BehaviorSubject<Klijent>(new Klijent());
   dataChange: BehaviorSubject<Klijent[]> = new BehaviorSubject<Klijent[]>([]);
-  private readonly API_URL = 'http://localhost:8083/klijent/';
 
   constructor(private httpClient: HttpClient) {
   }
 
   public getAll(): Observable<Klijent[]> {
-    this.httpClient.get<Klijent[]>(this.API_URL).subscribe(data => {
+    this.httpClient.get<Klijent[]>(environment.API_URL).subscribe(data => {
         this.dataChange.next(data);
       },
       (error: HttpErrorResponse) => {
@@ -27,7 +26,7 @@ export class KlijentService {
   }
 
   public getOne(id: number): Observable<Klijent> {
-    this.httpClient.get<Klijent>(this.API_URL + id).subscribe(data => {
+    this.httpClient.get<Klijent>(environment.API_URL + id).subscribe(data => {
         this.klijent.next(data);
       },
       (error: HttpErrorResponse) => {
@@ -37,15 +36,14 @@ export class KlijentService {
   }
 
   public add(klijent: Klijent): void {
-    this.httpClient.post(this.API_URL, klijent).subscribe();
+    this.httpClient.post(environment.API_URL, klijent).subscribe();
   }
 
   public update(artikl: Klijent): void {
-    this.httpClient.put(this.API_URL, artikl).subscribe();
+    this.httpClient.put(environment.API_URL, artikl).subscribe();
   }
 
   public delete(id: number): void {
-    console.log(this.API_URL + id);
-    this.httpClient.delete(this.API_URL + id).subscribe();
+    this.httpClient.delete(environment.API_URL + id).subscribe();
   }
 }

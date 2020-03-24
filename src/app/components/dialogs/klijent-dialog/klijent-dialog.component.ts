@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Klijent } from 'src/app/models/klijent';
-import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { KlijentService } from 'src/app/services/klijent.service';
-import { KreditService } from 'src/app/services/kredit.service';
-import { Kredit } from 'src/app/models/kredit';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
+import {KlijentService} from 'src/app/services/klijent.service';
+import {KreditService} from 'src/app/services/kredit.service';
+import {Kredit} from 'src/app/models/kredit';
 
 @Component({
   selector: 'app-klijent-dialog',
@@ -11,19 +10,20 @@ import { Kredit } from 'src/app/models/kredit';
   styleUrls: ['./klijent-dialog.component.css']
 })
 export class KlijentDialogComponent implements OnInit {
-
   public flag: number;
   public krediti: Kredit[];
+
   constructor(public snackBar: MatSnackBar,
               public dialogRef: MatDialogRef<KlijentDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Klijent,
+              @Inject(MAT_DIALOG_DATA) public data: any,
               public klijentService: KlijentService,
-              public kreditService: KreditService) { }
+              public kreditService: KreditService) {
+  }
 
   ngOnInit() {
-      this.kreditService.getAll().subscribe(data => {
-        this.krediti = data;
-      })
+    this.kreditService.getAll().subscribe(data => {
+      this.krediti = data;
+    });
   }
 
   public add(): void {

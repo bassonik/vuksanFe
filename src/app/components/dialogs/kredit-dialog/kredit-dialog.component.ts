@@ -29,9 +29,8 @@ export class KreditDialogComponent implements OnInit {
   }
 
   public add(): void {
-    this.data.id = -1;
     this.kreditService.add(this.data);
-    this.snackBar.open('Uspešno dodat kredit: ' + this.data.id, 'U redu', {
+    this.snackBar.open('Uspešno dodat kredit.', 'U redu', {
       duration: 2500,
     });
   }
