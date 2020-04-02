@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
-import {Racun} from 'src/app/models/racun';
 import {TipRacunaService} from 'src/app/services/tipRacuna.service';
 import {RacunService} from 'src/app/services/racun.service';
 import {Klijent} from 'src/app/models/klijent';
@@ -20,7 +19,7 @@ export class RacunDialogComponent implements OnInit {
 
   constructor(public snackBar: MatSnackBar,
               public dialogRef: MatDialogRef<RacunDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Racun,
+              @Inject(MAT_DIALOG_DATA) public data: any,
               public racunService: RacunService,
               public klijentService: KlijentService,
               public tipRacunaService: TipRacunaService) {
@@ -37,9 +36,10 @@ export class RacunDialogComponent implements OnInit {
 
 
   public add(): void {
-    this.data.id = -1;
+    this.data.id = 0;
     this.racunService.add(this.data);
-    this.snackBar.open('Uspešno dodat racun: ' + this.data.id, 'U redu', {
+    console.log(this.data);
+    this.snackBar.open('Uspešno dodat racun' , 'U redu', {
       duration: 2500,
     });
   }

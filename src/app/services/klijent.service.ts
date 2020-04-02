@@ -15,7 +15,7 @@ export class KlijentService {
   }
 
   public getAll(): Observable<Klijent[]> {
-    this.httpClient.get<Klijent[]>(environment.API_URL).subscribe(data => {
+    this.httpClient.get<Klijent[]>(environment.API_URL + '/klijent/').subscribe(data => {
         this.dataChange.next(data);
       },
       (error: HttpErrorResponse) => {
@@ -26,7 +26,7 @@ export class KlijentService {
   }
 
   public getOne(id: number): Observable<Klijent> {
-    this.httpClient.get<Klijent>(environment.API_URL + id).subscribe(data => {
+    this.httpClient.get<Klijent>(environment.API_URL + '/klijent/' + id).subscribe(data => {
         this.klijent.next(data);
       },
       (error: HttpErrorResponse) => {
@@ -36,14 +36,14 @@ export class KlijentService {
   }
 
   public add(klijent: Klijent): void {
-    this.httpClient.post(environment.API_URL, klijent).subscribe();
+    this.httpClient.post(environment.API_URL + '/klijent/', klijent).subscribe();
   }
 
   public update(artikl: Klijent): void {
-    this.httpClient.put(environment.API_URL, artikl).subscribe();
+    this.httpClient.put(environment.API_URL + '/klijent/', artikl).subscribe();
   }
 
   public delete(id: number): void {
-    this.httpClient.delete(environment.API_URL + id).subscribe();
+    this.httpClient.delete(environment.API_URL + '/klijent/' + id).subscribe();
   }
 }

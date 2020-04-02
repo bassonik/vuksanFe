@@ -11,13 +11,12 @@ import {environment} from "../../environments/environment";
 export class KreditService {
   kredit: BehaviorSubject<Kredit> = new BehaviorSubject<Kredit>(new Kredit());
   dataChange: BehaviorSubject<Kredit[]> = new BehaviorSubject<Kredit[]>([]);
-  private readonly API_URL = 'http://localhost:8083/kredit/';
 
   constructor(private httpClient: HttpClient) {
   }
 
   public getAll(): Observable<Kredit[]> {
-    this.httpClient.get<Kredit[]>(environment.API_URL).subscribe(data => {
+    this.httpClient.get<Kredit[]>(environment.API_URL + '/kredit/').subscribe(data => {
         this.dataChange.next(data);
       },
       (error: HttpErrorResponse) => {
@@ -28,7 +27,7 @@ export class KreditService {
   }
 
   public getOne(id: number): Observable<Kredit> {
-    this.httpClient.get<Kredit>(environment.API_URL + id).subscribe(data => {
+    this.httpClient.get<Kredit>(environment.API_URL + '/kredit/' + id).subscribe(data => {
         this.kredit.next(data);
       },
       (error: HttpErrorResponse) => {
@@ -37,15 +36,15 @@ export class KreditService {
     return this.kredit.asObservable();
   }
   public add(kredit: Kredit): void {
-    this.httpClient.post(environment.API_URL, kredit).subscribe();
+    this.httpClient.post(environment.API_URL + '/kredit/', kredit).subscribe();
   }
 
   public update(artikl: Kredit): void {
-    this.httpClient.put(environment.API_URL, artikl).subscribe();
+    this.httpClient.put(environment.API_URL + '/kredit/', artikl).subscribe();
   }
 
   public delete(id: number): void {
-    console.log(environment.API_URL + id);
-    this.httpClient.delete(environment.API_URL + id).subscribe();
+    console.log(environment.API_URL + '/kredit/' + id);
+    this.httpClient.delete(environment.API_URL + '/kredit/' + id).subscribe();
   }
 }

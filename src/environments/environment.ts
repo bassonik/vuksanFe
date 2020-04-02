@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://vuksan-java.herokuapp.com'
+  API_URL: 'http://localhost:8083'
 };
 
 /*

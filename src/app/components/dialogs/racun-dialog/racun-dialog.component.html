@@ -1,9 +1,9 @@
 <div class="container">
-  <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje stavke porudžbine</h3>
-  <h3 mat-dialog-title *ngIf="flag == 2">Modifikacija stavke porudžbine: {{data.id}}</h3>
-  <h3 mat-dialog-title *ngIf="flag == 3">Brisanje stavke porudžbine: {{data.id}}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje računa </h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Modifikacija računa : {{data.id}}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Brisanje računa : {{data.id}}</h3>
 
-  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+  <form class="mat-dialog-content"  #formControl="ngForm">
 
 
     <div class="form">
